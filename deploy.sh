@@ -73,7 +73,7 @@ case $choice in
         
         # Build frontend
         echo "Building frontend..."
-        cd frontend
+        #cd frontend
         npm run build
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}✅ Frontend build successful${NC}"
