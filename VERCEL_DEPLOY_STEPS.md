@@ -27,12 +27,14 @@ Follow these exact steps to deploy your photography portfolio:
 Root Directory: frontend
 ```
 
-**DO NOT leave this blank!** This is what fixes the npm install error.
+**DO NOT leave this blank!** This is what fixes the "cd: frontend: No such file or directory" error.
 
-The other settings will auto-detect:
-- Framework Preset: `Vite`
-- Build Command: `npm run build`
-- Output Directory: `dist`
+**Manually set these values** (don't rely on auto-detection):
+- **Root Directory**: `frontend` ⭐ **MOST IMPORTANT**
+- **Framework Preset**: `Vite`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Install Command**: `npm install` (default)
 
 ---
 
@@ -60,6 +62,16 @@ https://anindawildscapes.vercel.app
 
 ## 🔧 **If You Still Get Errors**
 
+### Error: "cd: frontend: No such file or directory"
+**Solution**: You forgot to set Root Directory to `frontend`
+1. Go to your project settings in Vercel
+2. Set **Root Directory** to `frontend`
+3. Redeploy
+
+### Error: "Missing script: install:frontend"
+**Solution**: Same as above - set Root Directory to `frontend`
+
+### Other Issues:
 1. **Check Root Directory**: Make sure it's set to `frontend`
 2. **Redeploy**: Go to Deployments tab and click "Redeploy"
 3. **Check Logs**: Look at the build logs for specific errors
