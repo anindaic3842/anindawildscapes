@@ -35,9 +35,18 @@ const PhotoGallery = ({ photos, selectedCategory }) => {
     setSelectedPhoto(filteredPhotos[newIndex])
   }
 
+  // Debug: Log the photos to console
+  console.log('PhotoGallery - filteredPhotos:', filteredPhotos)
+  console.log('PhotoGallery - selectedCategory:', selectedCategory)
+
   return (
     <>
       <div className="photo-gallery">
+        {filteredPhotos.length === 0 ? (
+          <div className="no-photos">
+            <p>No photos found for category: {selectedCategory}</p>
+          </div>
+        ) : null}
         <AnimatePresence>
           {filteredPhotos.map((photo, index) => (
             <motion.div
@@ -52,7 +61,20 @@ const PhotoGallery = ({ photos, selectedCategory }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <img src={photo.src} alt={photo.title} loading="lazy" />
+              <img 
+                src={photo.src} 
+                alt={photo.title} 
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  e.target.style.display = 'flex'
+                  e.target.style.alignItems = 'center'
+                  e.target.style.justifyContent = 'center'
+                  e.target.style.color = 'white'
+                  e.target.style.fontSize = '14px'
+                  e.target.innerHTML = 'Image not available'
+                }}
+              />
               <div className="photo-overlay">
                 <h3>{photo.title}</h3>
                 <p>{photo.category}</p>
