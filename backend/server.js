@@ -29,10 +29,38 @@ app.use(helmet({
   },
 }))
 
+// CORS configuration for production and development
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173', 
+  'http://localhost:12000',
+  'http://localhost:12001',
+  'http://localhost:12002',
+  'http://localhost:12003',
+  'http://localhost:12004',
+  'http://localhost:12005',
+  'https://work-1-oaofybnkjbpvsjhy.prod-runtime.all-hands.dev',
+  'https://anindawildscapes.vercel.app',
+  'https://anindawildscapes-git-feature-photography-portfolio-website-anindaic3842.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://work-1-oaofybnkjbpvsjhy.prod-runtime.all-hands.dev']
-    : ['http://localhost:12000', 'https://work-1-oaofybnkjbpvsjhy.prod-runtime.all-hands.dev'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Allow any vercel.app subdomain for preview deployments
+    if (origin.includes('vercel.app') || origin.includes('railway.app')) {
+      return callback(null, true);
+    }
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
+  },
   credentials: true
 }))
 
