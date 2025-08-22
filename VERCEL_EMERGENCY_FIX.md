@@ -28,6 +28,8 @@ In your Vercel project settings, make sure these are set:
 ✅ Install Command: npm install
 ```
 
+**⚠️ IMPORTANT**: Leave all other fields as default. Do NOT use custom install commands!
+
 ---
 
 ## 🎯 **Why This Happens**
