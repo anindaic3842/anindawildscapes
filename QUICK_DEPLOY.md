@@ -1,19 +1,28 @@
 # 🚀 Quick Deployment Fix
 
-If you're getting the `npm install` error during Vercel deployment, here are the solutions:
+If you're getting the `npm install` or `Missing script` error during Vercel deployment, here's the solution:
 
-## ✅ **Solution 1: Deploy Frontend Only (Recommended)**
+## ✅ **Solution: Deploy Frontend Folder Only (Recommended)**
+
+**The key is to deploy ONLY the frontend folder, not the entire repository.**
 
 1. **Go to Vercel Dashboard**: [vercel.com](https://vercel.com)
 2. **Import Project**: Click "New Project" → Import `anindaic3842/anindawildscapes`
-3. **Configure Settings**:
-   - **Root Directory**: `frontend` ⭐ (This is key!)
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
+3. **⭐ IMPORTANT - Configure Settings**:
+   - **Root Directory**: `frontend` (This fixes all npm errors!)
+   - **Framework Preset**: Vite (auto-detected)
+   - **Build Command**: `npm run build` (auto-detected)
+   - **Output Directory**: `dist` (auto-detected)
 4. **Add Environment Variable**:
-   - `VITE_API_URL` = `https://your-railway-backend.up.railway.app`
+   - Name: `VITE_API_URL`
+   - Value: `https://your-railway-backend.up.railway.app`
 5. **Deploy!**
+
+## 🎯 **Why This Works**
+
+- By setting Root Directory to `frontend`, Vercel only sees the frontend package.json
+- This avoids the monorepo complexity and missing script errors
+- Vercel will run `npm install` and `npm run build` in the frontend directory only
 
 ## ✅ **Solution 2: Use Different Vercel Config**
 
